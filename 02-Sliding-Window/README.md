@@ -44,9 +44,10 @@ Sliding Window is a technique where a window (a contiguous subarray or substring
 - ✅ 03. Maximum Number of Vowels in a Substring of Given Length
 
 ### Dynamic Size Window
-- ✅ 04. Longest Substring Without Repeating Characters
-- ✅ 05. Fruit Into Baskets
-- ✅ 06. Longest Repeating Character Replacement
+- ✅ 04. Max Consecutive Ones III
+- ✅ 05. Longest Substring Without Repeating Characters
+- ✅ 06. Fruit Into Baskets
+- ✅ 07. Longest Repeating Character Replacement
 
 ---
 

@@ -91,7 +91,27 @@ Count vowels in first window. Slide: if entering character is vowel, add 1. If l
 
 ---
 
-## Problem 4: Longest Substring Without Repeating Characters
+## Problem 4: Max Consecutive Ones III
+### Question:
+Given a binary array and an integer K, return the maximum number of consecutive 1s if you can flip at most K zeros.
+### Example:
+- **Input**: `nums = [1,1,0,0,1,1,1,0,1,1]`, `k = 2`
+- **Output**: `6`
+### Pattern:
+Sliding Window (Dynamic Size) + Counter
+### Pattern Recognition:
+"At most K flips" + "Maximum consecutive ones"
+### Approach:
+Track `zeroCount` in window. Expand `right`. If `zeroCount > k`, shrink from `left`. Track maximum length.
+### Key Insight:
+We never actually flip the zeros. We only ask: "Can this window become all 1s if I flip at most k zeros?"
+### Time & Space Complexity:
+- **Time Complexity**: $O(n)$
+- **Space Complexity**: $O(1)$
+
+---
+
+## Problem 5: Longest Substring Without Repeating Characters
 ### Question:
 Given a string, find the length of the longest substring without repeating characters.
 ### Example:
@@ -109,7 +129,7 @@ Use HashSet to track characters in window. Expand `right`. If duplicate found, s
 
 ---
 
-## Problem 5: Fruit Into Baskets
+## Problem 6: Fruit Into Baskets
 ### Question:
 Given an integer array representing fruit types, find the maximum number of fruits you can collect with at most 2 baskets (at most 2 distinct types).
 ### Example:
@@ -127,7 +147,7 @@ Use HashMap to track frequency. Expand `right`. When `map.size() > 2`, shrink fr
 
 ---
 
-## Problem 6: Longest Repeating Character Replacement
+## Problem 7: Longest Repeating Character Replacement
 ### Question:
 Given a string and an integer K, find the length of the longest substring where you can replace at most K characters to make all characters the same.
 ### Example:
@@ -139,6 +159,8 @@ Sliding Window (Dynamic Size) + HashMap + maxFrequency
 "Replace at most K characters" + "Longest substring"
 ### Approach:
 Use HashMap for frequency. Track `maxFrequency`. If `windowLength - maxFrequency > k`, shrink from `left`. Track maximum length.
+### Core Idea:
+Keep the character that appears the most. Replace all other characters. If the number of replacements needed is more than k, shrink the window.
 ### Time & Space Complexity:
 - **Time Complexity**: $O(n)$
 - **Space Complexity**: $O(1)$ (at most 26 entries for uppercase letters)
@@ -149,9 +171,21 @@ Use HashMap for frequency. Track `maxFrequency`. If `windowLength - maxFrequency
 
 | Problem | Tracking | Valid Condition | Need `map.remove()`? |
 | :--- | :--- | :--- | :--- |
+| Max Consecutive Ones III | zeroCount | `zeroCount <= k` | N/A (no map used) |
 | Longest Substring Without Repeating | HashSet | No duplicate characters | Use `set.remove()` |
 | Fruit Into Baskets | HashMap frequency | `map.size() <= 2` | Yes, when count becomes 0 |
 | Longest Repeating Character Replacement | HashMap + maxFrequency | `windowLength - maxFrequency <= k` | No, we don't check `map.size()` |
+
+---
+
+## The Biggest Connection (Problems 4 and 7)
+
+| Problem | What we keep | What we count | Valid when |
+| :--- | :--- | :--- | :--- |
+| Max Consecutive Ones III | 1s | zeros in window | `zeroCount <= k` |
+| Longest Repeating Character Replacement | Most frequent character | characters different from majority | `windowLength - maxFrequency <= k` |
+
+**One sentence to remember:** Sliding window never performs the operation. It only checks whether the current window could become valid after doing the allowed operation.
 
 ---
 
