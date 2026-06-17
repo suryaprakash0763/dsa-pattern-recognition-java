@@ -1,4 +1,4 @@
-# 05. Fruit Into Baskets
+# 10. Fruit Into Baskets
 
 ## Question
 You have a row of trees, each tree produces a fruit represented by an integer. You have 2 baskets, and each basket can only hold one type of fruit. Starting from any tree, collect the maximum number of fruits using at most 2 baskets (at most 2 distinct fruit types in a contiguous subarray).
@@ -11,7 +11,7 @@ You have a row of trees, each tree produces a fruit represented by an integer. Y
 
 ## Pattern Description
 - **Pattern**: Sliding Window
-- **Type**: Dynamic Size + HashMap (frequency count)
+- **Type**: Variable Size + HashMap (frequency count)
 - **Recognition Clue**: "At most 2 distinct types" + "Longest contiguous subarray" → dynamic window with HashMap size constraint.
 
 ---

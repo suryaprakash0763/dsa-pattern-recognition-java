@@ -40,14 +40,49 @@ Sliding Window is a technique where a window (a contiguous subarray or substring
 
 ### Fixed Size Window
 - ✅ 01. Maximum Sum Subarray of Size K
-- ✅ 02. Average of All Subarrays of Size K
-- ✅ 03. Maximum Number of Vowels in a Substring of Given Length
+- ✅ 02. Maximum Average Subarray of Size K
+- ✅ 03. Maximum Vowels in a Substring of Length K
+- ✅ 04. Maximum Even Numbers in a Window of Size K
 
-### Dynamic Size Window
-- ✅ 04. Max Consecutive Ones III
-- ✅ 05. Longest Substring Without Repeating Characters
-- ✅ 06. Fruit Into Baskets
-- ✅ 07. Longest Repeating Character Replacement
+### Variable Size Window
+- ✅ 05. Minimum Size Subarray Sum
+- ✅ 06. Longest Subarray with Sum ≤ K
+- ✅ 07. Longest Subarray of 1's After Deleting One Element
+- ✅ 08. Longest Substring Without Repeating Characters
+- ✅ 09. Max Consecutive Ones III
+- ✅ 10. Fruit Into Baskets
+- ✅ 11. Longest Repeating Character Replacement
+
+---
+
+## Tracking Techniques Learned
+
+| Pattern | Variable / Data Structure |
+| :--- | :--- |
+| Sum tracking | `windowSum` |
+| Count tracking | `zeroCount`, `vowelCount`, `evenCount` |
+| Uniqueness checking | `HashSet` |
+| Frequency counting | `HashMap` |
+| Majority element in window | `HashMap` + `maxFrequency` |
+
+---
+
+## The Universal Variable Sliding Window Template
+
+```java
+for (right = 0; right < n; right++) {
+
+    // 1. Add the right element
+
+    // 2. If window becomes invalid
+    while (invalid) {
+        // Remove left element
+        left++;
+    }
+
+    // 3. Window is valid → Update answer
+}
+```
 
 ---
 

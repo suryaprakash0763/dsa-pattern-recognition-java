@@ -1,4 +1,4 @@
-# 06. Longest Repeating Character Replacement
+# 11. Longest Repeating Character Replacement
 
 ## Question
 Given a string `s` and an integer `k`, find the length of the longest substring where you can replace at most `k` characters to make all characters in the substring the same.
@@ -11,7 +11,7 @@ Given a string `s` and an integer `k`, find the length of the longest substring 
 
 ## Pattern Description
 - **Pattern**: Sliding Window
-- **Type**: Dynamic Size + HashMap + maxFrequency
+- **Type**: Variable Size + HashMap + maxFrequency
 - **Recognition Clue**: "Replace at most K characters" + "Longest substring with all same characters" → dynamic window tracking the most frequent character.
 
 ---
@@ -33,6 +33,12 @@ Because the condition checks `windowLength - maxFrequency`, not `map.size()`. A 
 
 ### Core Idea:
 Keep the character that appears the most. Replace all other characters. If the number of replacements needed is more than `k`, shrink the window.
+
+### `map.remove()` Rule:
+| Problem | Need `map.remove()` when count becomes 0? | Reason |
+| :--- | :--- | :--- |
+| Fruit Into Baskets | Yes | We use `map.size()` |
+| Character Replacement | No | We don't use `map.size()` |
 
 ---
 

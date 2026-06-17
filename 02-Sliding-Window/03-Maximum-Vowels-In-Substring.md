@@ -1,4 +1,4 @@
-# 03. Maximum Number of Vowels in a Substring of Given Length
+# 03. Maximum Vowels in a Substring of Length K
 
 ## Question
 Given a string `s` and an integer `k`, return the maximum number of vowel letters in any substring of `s` with length `k`. Vowels are `a`, `e`, `i`, `o`, `u`.

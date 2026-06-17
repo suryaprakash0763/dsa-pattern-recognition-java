@@ -1,4 +1,4 @@
-# 04. Max Consecutive Ones III
+# 09. Max Consecutive Ones III
 
 ## Question
 Given a binary array `nums` and an integer `k`, return the maximum number of consecutive `1`s in the array if you can flip at most `k` `0`s.
@@ -11,7 +11,7 @@ Given a binary array `nums` and an integer `k`, return the maximum number of con
 
 ## Pattern Description
 - **Pattern**: Sliding Window
-- **Type**: Dynamic Size (counter-based)
+- **Type**: Variable Size (counter-based)
 - **Recognition Clue**: "At most K flips" + "Maximum consecutive ones" → dynamic window tracking zero count.
 
 ---
@@ -31,13 +31,12 @@ We never actually flip the zeros. We only ask: **"Can this window become all 1s 
 
 ---
 
-## Connection to Longest Repeating Character Replacement
+## Connection to Problem 7 and Problem 11
 | Problem | What we keep | What we count | Valid when |
 | :--- | :--- | :--- | :--- |
+| Longest Subarray of 1s After Delete | 1s | zeros in window | `zeroCount <= 1` |
 | Max Consecutive Ones III | 1s | zeros in window | `zeroCount <= k` |
-| Longest Repeating Character Replacement | Most frequent character | characters different from majority | `windowLength - maxFrequency <= k` |
-
-Both problems follow the same idea: **the sliding window never performs the operation. It only checks whether the current window could become valid after doing the allowed operation.**
+| Longest Repeating Char Replacement | Most frequent char | different characters | `windowLength - maxFrequency <= k` |
 
 ---
 
