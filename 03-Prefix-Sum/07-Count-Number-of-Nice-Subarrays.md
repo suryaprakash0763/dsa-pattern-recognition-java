@@ -98,9 +98,8 @@ public class CountNumberOfNiceSubarrays {
         int[] counts = new int[n + 1];
         counts[0] = 1; // Base case: 0 odd numbers has occurred once
 
-        for (int num : nums) {
             // Update running oddCount (add 1 if odd, 0 if even)
-            oddCount += Math.abs(num % 2); // Use Math.abs to handle negative numbers if present
+            oddCount += num % 2;
 
             if (oddCount >= k) {
                 niceSubarrays += counts[oddCount - k];

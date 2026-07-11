@@ -37,7 +37,7 @@ public class CountNumberOfNiceSubarrays {
         counts[0] = 1; // Base case: 0 odd numbers has occurred once
 
         for (int num : nums) {
-            oddCount += Math.abs(num % 2); // math.abs to handle negative numbers if present
+            oddCount += num % 2;
 
             if (oddCount >= k) {
                 niceSubarrays += counts[oddCount - k];
