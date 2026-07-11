@@ -6,17 +6,17 @@ Prefix Sum is a technique used to perform fast range sum queries or partition-ba
 
 ## Complexity Summary
 
-| Problem | Time Complexity | Space Complexity | Key Technique |
+| Problem | Brute Force Time/Space | Optimized Time/Space | Key Technique |
 | :--- | :--- | :--- | :--- |
-| **01. Running Sum of 1D Array** | $O(N)$ | $O(1)$ auxiliary | Cumulative Sum in-place |
-| **02. Find Pivot Index** | $O(N)$ | $O(1)$ | `totalSum - leftSum - nums[i]` |
-| **03. Range Sum Query - Immutable** | $O(1)$ query | $O(N)$ | Precomputed 1-indexed Prefix Array |
-| **04. Subarray Sum Equals K** | $O(N)$ | $O(N)$ | Prefix Sum + HashMap frequency |
-| **05. Longest Subarray Sum Equals K** | $O(N)$ | $O(N)$ | Prefix Sum + HashMap first index |
-| **06. Contiguous Array** | $O(N)$ | $O(N)$ | Map `0` to `-1` + HashMap first index |
-| **07. Count Number of Nice Subarrays** | $O(N)$ | $O(N)$ | Map odd to 1, even to 0 + Prefix frequency array |
-| **08. Number of Subarrays With Odd Sum** | $O(N)$ | $O(1)$ | Track counts of odd & even prefixes |
-| **09. Product of Array Except Self** | $O(N)$ | $O(1)$ auxiliary | Prefix & Suffix product passes |
+| **01. Running Sum of 1D Array** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ | Cumulative Sum in-place |
+| **02. Range Sum Query - Immutable** | $O(N)$ query / $O(1)$ | $O(1)$ query / $O(N)$ | Precomputed 1-indexed Prefix Array |
+| **03. Find Pivot Index** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ | `totalSum - leftSum - nums[i]` |
+| **04. Subarray Sum Equals K** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Prefix Sum + HashMap frequency |
+| **05. Longest Subarray Sum Equals K** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Prefix Sum + HashMap first index |
+| **06. Contiguous Array** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Map `0` to `-1` + HashMap first index |
+| **07. Count Number of Nice Subarrays** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Map odd to 1, even to 0 + Prefix frequency array |
+| **08. Number of Subarrays With Odd Sum** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ | Track counts of odd & even prefixes |
+| **09. Product of Array Except Self** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ auxiliary | Prefix & Suffix product passes |
 
 ---
 
@@ -49,7 +49,24 @@ For each element from index `1` to `nums.length - 1`, we update `nums[i] = nums[
 
 ---
 
-## Problem 2: Find Pivot Index
+## Problem 2: Range Sum Query - Immutable
+
+### Question
+Implement the `NumArray` class which precalculates cumulative sums to return the sum of the elements of `nums` between indices `left` and `right` inclusive in $O(1)$ time.
+
+### Solution Idea
+Use 1-indexed prefix sums where `prefix[i]` stores the sum of the first `i` elements (`nums[0]` through `nums[i-1]`).
+- `prefix[i + 1] = prefix[i] + nums[i]`
+- `sumRange(left, right) = prefix[right + 1] - prefix[left]`
+This avoids the edge case of checking if `left == 0`.
+
+### Complexity
+- **Time Complexity**: $O(n)$ for initialization, $O(1)$ per query.
+- **Space Complexity**: $O(n)$ to store prefix array.
+
+---
+
+## Problem 3: Find Pivot Index
 
 ### Question
 Given an array of integers `nums`, calculate the pivot index of this array.
@@ -68,23 +85,6 @@ Instead of calculating the left sum and right sum from scratch at each index:
 ### Complexity
 - **Time Complexity**: $O(n)$ — We pass through the array twice (once to sum, once to find the pivot).
 - **Space Complexity**: $O(1)$ — Only a few variables (`totalSum`, `leftSum`) are tracked.
-
----
-
-## Problem 3: Range Sum Query - Immutable
-
-### Question
-Implement the `NumArray` class which precalculates cumulative sums to return the sum of the elements of `nums` between indices `left` and `right` inclusive in $O(1)$ time.
-
-### Solution Idea
-Use 1-indexed prefix sums where `prefix[i]` stores the sum of the first `i` elements (`nums[0]` through `nums[i-1]`).
-- `prefix[i + 1] = prefix[i] + nums[i]`
-- `sumRange(left, right) = prefix[right + 1] - prefix[left]`
-This avoids the edge case of checking if `left == 0`.
-
-### Complexity
-- **Time Complexity**: $O(n)$ for initialization, $O(1)$ per query.
-- **Space Complexity**: $O(n)$ to store prefix array.
 
 ---
 

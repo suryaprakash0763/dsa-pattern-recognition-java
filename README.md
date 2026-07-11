@@ -38,8 +38,8 @@ Welcome to the **DSA-Java** reference repository. This repository is structured 
 
 ### 3. Prefix Sum
 - [x] 01. Running Sum of 1D Array
-- [x] 02. Find Pivot Index
-- [x] 03. Range Sum Query - Immutable
+- [x] 02. Range Sum Query - Immutable
+- [x] 03. Find Pivot Index
 - [x] 04. Subarray Sum Equals K
 - [x] 05. Longest Subarray Sum Equals K
 - [x] 06. Contiguous Array

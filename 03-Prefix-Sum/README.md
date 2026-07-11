@@ -34,8 +34,8 @@ Prefix Sum is a technique where we precompute cumulative sums of elements in a s
 ## 📋 Problem List
 
 - ✅ 01. Running Sum of 1D Array
-- ✅ 02. Find Pivot Index
-- ✅ 03. Range Sum Query - Immutable
+- ✅ 02. Range Sum Query - Immutable
+- ✅ 03. Find Pivot Index
 - ✅ 04. Subarray Sum Equals K
 - ✅ 05. Longest Subarray Sum Equals K
 - ✅ 06. Contiguous Array

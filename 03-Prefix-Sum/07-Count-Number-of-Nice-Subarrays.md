@@ -18,33 +18,75 @@ Given an array of integers `nums` and an integer `k`. A continuous subarray is c
 ---
 
 ## Approach
-1. Convert the problem: treat Odd numbers as `1` and Even numbers as `0`. We want to find contiguous subarrays with sum `k`.
-2. Keep a running `oddCount` (analogous to `prefixSum`).
-3. Since `oddCount` can never exceed the array length `n`, we can use a frequency array `counts` of size `n + 1` instead of a HashMap. `counts[i]` stores the number of times we have seen a prefix with exactly `i` odd numbers so far.
-4. At each step, update `oddCount` (incrementing by `num % 2`).
-5. If `oddCount >= k`, add `counts[oddCount - k]` to the total nice subarrays count.
-6. Increment `counts[oddCount]`.
-7. **Base Case**: Set `counts[0] = 1` initially to handle subarrays starting at index `0`.
+
+### 1. Brute Force (Nested Loops)
+- Run nested loops to explore all subarrays.
+- In the inner loop, keep a count of odd numbers seen so far.
+- If the count of odd numbers equals `k`, increment the nice subarrays count.
+- **Time Complexity**: $O(n^2)$
+- **Space Complexity**: $O(1)$
+
+### 2. Optimized (Prefix Odd Count Frequency Array)
+- Transform the problem: Treat Odd numbers as `1` and Even numbers as `0`. We want to find contiguous subarrays with sum `k`.
+- Keep a running `oddCount` (analogous to `prefixSum`).
+- Instead of a HashMap, since `oddCount` can never exceed the array length `n`, we can use an integer array `counts` of size `n + 1` where `counts[i]` stores the number of times we have seen `i` odd numbers so far.
+- At each step, if `oddCount >= k`, add `counts[oddCount - k]` to the total nice subarrays count.
+- Increment `counts[oddCount]`.
+- **Base Case**: Set `counts[0] = 1` initially to handle subarrays starting at index `0`.
+- **Time Complexity**: $O(n)$
+- **Space Complexity**: $O(n)$
 
 ---
 
 ## Complexity
-- **Time Complexity**: $O(n)$ where $n$ is the length of `nums`. We scan the array once.
-- **Space Complexity**: $O(n)$ to store prefix counts in the frequency array.
+- **Time Complexity**:
+  - Brute Force: $O(n^2)$
+  - Optimized: $O(n)$
+- **Space Complexity**:
+  - Brute Force: $O(1)$
+  - Optimized: $O(n)$
 
 ---
 
 ## Java Implementation
 
+### Brute Force Solution
+```java
+public class CountNumberOfNiceSubarraysBrute {
+    public static void main(String[] args) {
+        int[] nums = {1, 1, 2, 1, 1};
+        int k = 3;
+        System.out.println(numberOfNiceSubarrays(nums, k)); // Output: 2
+    }
+
+    public static int numberOfNiceSubarrays(int[] nums, int k) {
+        int count = 0;
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            int oddCount = 0;
+            for (int j = i; j < n; j++) {
+                if (nums[j] % 2 != 0) {
+                    oddCount++;
+                }
+                if (oddCount == k) {
+                    count++;
+                } else if (oddCount > k) {
+                    break;
+                }
+            }
+        }
+        return count;
+    }
+}
+```
+
+### Optimized Solution (Prefix Odd Counts Array)
 ```java
 public class CountNumberOfNiceSubarrays {
     public static void main(String[] args) {
         int[] nums = {1, 1, 2, 1, 1};
         int k = 3;
-
-        int result = numberOfNiceSubarrays(nums, k);
-
-        System.out.println(result); // Output: 2
+        System.out.println(numberOfNiceSubarrays(nums, k)); // Output: 2
     }
 
     public static int numberOfNiceSubarrays(int[] nums, int k) {

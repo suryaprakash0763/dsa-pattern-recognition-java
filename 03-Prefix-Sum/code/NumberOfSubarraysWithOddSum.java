@@ -1,10 +1,29 @@
 public class NumberOfSubarraysWithOddSum {
     public static void main(String[] args) {
         int[] arr = {1, 3, 5};
-        System.out.println(numOfSubarrays(arr)); // Output: 4
+
+        System.out.println("Brute Force Output: " + numOfSubarraysBruteForce(arr));
+        System.out.println("Optimized Output: " + numOfSubarraysOptimized(arr));
     }
 
-    public static int numOfSubarrays(int[] arr) {
+    // Brute Force: O(n^2) Time, O(1) Space
+    public static int numOfSubarraysBruteForce(int[] arr) {
+        int count = 0;
+        int n = arr.length;
+        for (int i = 0; i < n; i++) {
+            long sum = 0;
+            for (int j = i; j < n; j++) {
+                sum += arr[j];
+                if (sum % 2 != 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    // Optimized: O(n) Time, O(1) Space
+    public static int numOfSubarraysOptimized(int[] arr) {
         int count = 0;
         int prefixSum = 0;
 

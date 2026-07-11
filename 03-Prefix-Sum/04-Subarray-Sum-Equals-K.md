@@ -20,26 +20,66 @@ A subarray is a contiguous non-empty sequence of elements within an array.
 ---
 
 ## Approach
-1. The sum of a subarray from index `i` to `j` is:
-   `sum(i, j) = prefixSum[j] - prefixSum[i - 1]`
-2. If we want `sum(i, j) == k`, then:
-   `prefixSum[j] - prefixSum[i - 1] = k \implies prefixSum[i - 1] = prefixSum[j] - k`
-3. We traverse the array while maintaining a running `prefixSum`.
-4. At each step, check if `prefixSum - k` exists in a HashMap that stores the frequencies of previously seen prefix sums.
-5. If it exists, add the frequency of `prefixSum - k` to the total count.
-6. Store/update the frequency of the current `prefixSum` in the map.
-7. **Base Case**: Initialize the map with `map.put(0, 1)` because a prefix sum of `0` is conceptually seen once before we start (to handle subarrays starting at index `0`).
+
+### 1. Brute Force (Nested Loops)
+- Check all possible subarrays. Use a outer loop for the start index `i` and an inner loop for the end index `j`.
+- Maintain a running sum of the subarray from `i` to `j`.
+- If the sum equals `k`, increment the count.
+- **Time Complexity**: $O(n^2)$
+- **Space Complexity**: $O(1)$
+
+### 2. Optimized (Prefix Sum + HashMap)
+- The sum of subarray `i..j` is `prefixSum[j] - prefixSum[i-1]`.
+- If we want `prefixSum[j] - prefixSum[i-1] == k`, it is equivalent to `prefixSum[i-1] == prefixSum[j] - k`.
+- Iterate through `nums`, maintaining a running `prefixSum`.
+- Check if `prefixSum - k` exists in a HashMap that stores the frequency of previously seen prefix sums.
+- If it does, add its frequency to `count`.
+- Record the current `prefixSum` in the map.
+- **Base Case**: Put `(0, 1)` in the map to handle subarrays starting at index `0`.
+- **Time Complexity**: $O(n)$
+- **Space Complexity**: $O(n)$
 
 ---
 
 ## Complexity
-- **Time Complexity**: $O(n)$ where $n$ is the length of `nums`. We traverse the array once and perform $O(1)$ HashMap operations.
-- **Space Complexity**: $O(n)$ to store prefix sums in the HashMap.
+- **Time Complexity**:
+  - Brute Force: $O(n^2)$
+  - Optimized: $O(n)$
+- **Space Complexity**:
+  - Brute Force: $O(1)$
+  - Optimized: $O(n)$
 
 ---
 
 ## Java Implementation
 
+### Brute Force Solution
+```java
+public class SubarraySumEqualsKBrute {
+    public static void main(String[] args) {
+        int[] nums = {1, 1, 1};
+        int k = 2;
+        System.out.println(subarraySum(nums, k)); // Output: 2
+    }
+
+    public static int subarraySum(int[] nums, int k) {
+        int count = 0;
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            int sum = 0;
+            for (int j = i; j < n; j++) {
+                sum += nums[j];
+                if (sum == k) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+```
+
+### Optimized Solution (Prefix Sum + HashMap)
 ```java
 import java.util.HashMap;
 
@@ -47,10 +87,7 @@ public class SubarraySumEqualsK {
     public static void main(String[] args) {
         int[] nums = {1, 1, 1};
         int k = 2;
-
-        int result = subarraySum(nums, k);
-
-        System.out.println(result); // Output: 2
+        System.out.println(subarraySum(nums, k)); // Output: 2
     }
 
     public static int subarraySum(int[] nums, int k) {
