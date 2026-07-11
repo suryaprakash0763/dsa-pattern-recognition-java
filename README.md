@@ -21,24 +21,32 @@ Welcome to the **DSA-Java** reference repository. This repository is structured 
 
 ---
 
-### 2. Sliding Window (Planned)
-- [ ] 01. Maximum Sum Subarray of Size K
-- [ ] 02. Average of All Subarrays of Size K
-- [ ] 03. Maximum Number of Vowels in a Substring of Given Length
+### 2. Sliding Window
+- [x] 01. Maximum Sum Subarray of Size K
+- [x] 02. Maximum Average Subarray of Size K
+- [x] 03. Maximum Vowels in a Substring of Length K
+- [x] 04. Maximum Even Numbers in a Window of Size K
+- [x] 05. Minimum Size Subarray Sum
+- [x] 06. Longest Subarray with Sum <= K
+- [x] 07. Longest Subarray of 1's After Deleting One Element
+- [x] 08. Longest Substring Without Repeating Characters
+- [x] 09. Max Consecutive Ones III
+- [x] 10. Fruit Into Baskets
+- [x] 11. Longest Repeating Character Replacement
 
 ---
 
-### 3. HashMap / HashSet (Planned)
+### 3. Prefix Sum
+- [x] 01. Running Sum of 1D Array
+- [x] 02. Find Pivot Index
+
+---
+
+### 4. HashMap / HashSet (Planned)
 - [ ] 01. Contains Duplicate
 - [ ] 02. Contains Nearby Duplicate
 - [ ] 03. Majority Element
 - [ ] 04. Longest Consecutive Sequence
-
----
-
-### 4. Prefix Sum (Planned)
-- [ ] 01. Find Pivot Index
-- [ ] 02. Running Sum of 1d Array
 
 ---
 
@@ -54,8 +62,10 @@ Welcome to the **DSA-Java** reference repository. This repository is structured 
 
 ## 📂 Repository Structure
 
-- [`01-Two-Pointers/`](file:///C:/Users/DELL/.gemini/antigravity-ide/scratch/DSA-Java/01-Two-Pointers/) — Concepts, revision notes, problem breakdowns, and Java code for the Two Pointers pattern.
-- [`Interview-Revision/`](file:///C:/Users/DELL/.gemini/antigravity-ide/scratch/DSA-Java/Interview-Revision/) — Pattern recognition cheat sheets, complexity references, and tips.
+- [`01-Two-Pointers/`](file:///C:/Users/DELL/Downloads/DSA/01-Two-Pointers/) — Concepts, revision notes, problem breakdowns, and Java code for the Two Pointers pattern.
+- [`02-Sliding-Window/`](file:///C:/Users/DELL/Downloads/DSA/02-Sliding-Window/) — Concepts, revision notes, problem breakdowns, and Java code for the Sliding Window pattern.
+- [`03-Prefix-Sum/`](file:///C:/Users/DELL/Downloads/DSA/03-Prefix-Sum/) — Concepts, revision notes, problem breakdowns, and Java code for the Prefix Sum pattern.
+- [`Interview-Revision/`](file:///C:/Users/DELL/Downloads/DSA/Interview-Revision/) — Pattern recognition cheat sheets, complexity references, and tips.
 
 ---
 
