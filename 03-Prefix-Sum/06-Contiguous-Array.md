@@ -50,15 +50,21 @@ Given a binary array `nums`, return the maximum length of a contiguous subarray 
 
 ## Java Implementation
 
-### Brute Force Solution
+- **Java Source File**: [ContiguousArray.java](code/ContiguousArray.java)
+
 ```java
-public class ContiguousArrayBrute {
+import java.util.HashMap;
+
+public class ContiguousArray {
     public static void main(String[] args) {
         int[] nums = {0, 1, 0};
-        System.out.println(findMaxLength(nums)); // Output: 2
+
+        System.out.println("Brute Force Output: " + findMaxLengthBruteForce(nums));
+        System.out.println("Optimized Output: " + findMaxLengthOptimized(nums));
     }
 
-    public static int findMaxLength(int[] nums) {
+    // Brute Force: O(n^2) Time, O(1) Space
+    public static int findMaxLengthBruteForce(int[] nums) {
         int maxLength = 0;
         int n = nums.length;
         for (int i = 0; i < n; i++) {
@@ -77,20 +83,9 @@ public class ContiguousArrayBrute {
         }
         return maxLength;
     }
-}
-```
 
-### Optimized Solution (Prefix Sum + HashMap)
-```java
-import java.util.HashMap;
-
-public class ContiguousArray {
-    public static void main(String[] args) {
-        int[] nums = {0, 1, 0};
-        System.out.println(findMaxLength(nums)); // Output: 2
-    }
-
-    public static int findMaxLength(int[] nums) {
+    // Optimized: O(n) Time, O(n) Space (Prefix Sum + HashMap)
+    public static int findMaxLengthOptimized(int[] nums) {
         int maxLength = 0;
         int prefixSum = 0;
         HashMap<Integer, Integer> map = new HashMap<>();

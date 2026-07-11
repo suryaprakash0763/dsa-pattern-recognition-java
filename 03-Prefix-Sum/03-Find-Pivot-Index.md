@@ -58,15 +58,19 @@ Return the leftmost pivot index. If no such index exists, return `-1`.
 
 ## Java Implementation
 
-### Brute Force Solution
+- **Java Source File**: [FindPivotIndex.java](code/FindPivotIndex.java)
+
 ```java
-public class FindPivotIndexBrute {
+public class FindPivotIndex {
     public static void main(String[] args) {
         int[] nums = {1, 7, 3, 6, 5, 6};
-        System.out.println(pivotIndex(nums)); // Output: 3
+
+        System.out.println("Brute Force Output: " + pivotIndexBruteForce(nums));
+        System.out.println("Optimized Output: " + pivotIndexOptimized(nums));
     }
 
-    public static int pivotIndex(int[] nums) {
+    // Brute Force: O(n^2) Time, O(1) Space
+    public static int pivotIndexBruteForce(int[] nums) {
         int n = nums.length;
         for (int i = 0; i < n; i++) {
             int leftSum = 0;
@@ -85,18 +89,9 @@ public class FindPivotIndexBrute {
         }
         return -1;
     }
-}
-```
 
-### Optimized Solution (Prefix Sum)
-```java
-public class FindPivotIndex {
-    public static void main(String[] args) {
-        int[] nums = {1, 7, 3, 6, 5, 6};
-        System.out.println(pivotIndex(nums)); // Output: 3
-    }
-
-    public static int pivotIndex(int[] nums) {
+    // Optimized: O(n) Time, O(1) Space
+    public static int pivotIndexOptimized(int[] nums) {
         int totalSum = 0;
         for (int num : nums) {
             totalSum += num;
@@ -109,6 +104,7 @@ public class FindPivotIndex {
             }
             leftSum += nums[i];
         }
+
         return -1;
     }
 }

@@ -50,16 +50,20 @@ Given an array of integers `nums` and an integer `k`. A continuous subarray is c
 
 ## Java Implementation
 
-### Brute Force Solution
+- **Java Source File**: [CountNumberOfNiceSubarrays.java](code/CountNumberOfNiceSubarrays.java)
+
 ```java
-public class CountNumberOfNiceSubarraysBrute {
+public class CountNumberOfNiceSubarrays {
     public static void main(String[] args) {
         int[] nums = {1, 1, 2, 1, 1};
         int k = 3;
-        System.out.println(numberOfNiceSubarrays(nums, k)); // Output: 2
+
+        System.out.println("Brute Force Output: " + numberOfNiceSubarraysBruteForce(nums, k));
+        System.out.println("Optimized Output: " + numberOfNiceSubarraysOptimized(nums, k));
     }
 
-    public static int numberOfNiceSubarrays(int[] nums, int k) {
+    // Brute Force: O(n^2) Time, O(1) Space
+    public static int numberOfNiceSubarraysBruteForce(int[] nums, int k) {
         int count = 0;
         int n = nums.length;
         for (int i = 0; i < n; i++) {
@@ -77,28 +81,17 @@ public class CountNumberOfNiceSubarraysBrute {
         }
         return count;
     }
-}
-```
 
-### Optimized Solution (Prefix Odd Counts Array)
-```java
-public class CountNumberOfNiceSubarrays {
-    public static void main(String[] args) {
-        int[] nums = {1, 1, 2, 1, 1};
-        int k = 3;
-        System.out.println(numberOfNiceSubarrays(nums, k)); // Output: 2
-    }
-
-    public static int numberOfNiceSubarrays(int[] nums, int k) {
+    // Optimized: O(n) Time, O(n) Space (Prefix Odd Count Frequency Array)
+    public static int numberOfNiceSubarraysOptimized(int[] nums, int k) {
         int niceSubarrays = 0;
         int oddCount = 0;
         int n = nums.length;
 
-        // counts[i] will store the number of times we've seen a prefix with 'i' odd numbers
         int[] counts = new int[n + 1];
         counts[0] = 1; // Base case: 0 odd numbers has occurred once
 
-            // Update running oddCount (add 1 if odd, 0 if even)
+        for (int num : nums) {
             oddCount += num % 2;
 
             if (oddCount >= k) {

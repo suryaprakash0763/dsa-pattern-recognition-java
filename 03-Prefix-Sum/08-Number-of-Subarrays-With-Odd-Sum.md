@@ -60,15 +60,19 @@ Given an array of integers `arr`, return the number of subarrays with an **odd**
 
 ## Java Implementation
 
-### Brute Force Solution
+- **Java Source File**: [NumberOfSubarraysWithOddSum.java](code/NumberOfSubarraysWithOddSum.java)
+
 ```java
-public class NumberOfSubarraysWithOddSumBrute {
+public class NumberOfSubarraysWithOddSum {
     public static void main(String[] args) {
         int[] arr = {1, 3, 5};
-        System.out.println(numOfSubarrays(arr)); // Output: 4
+
+        System.out.println("Brute Force Output: " + numOfSubarraysBruteForce(arr));
+        System.out.println("Optimized Output: " + numOfSubarraysOptimized(arr));
     }
 
-    public static int numOfSubarrays(int[] arr) {
+    // Brute Force: O(n^2) Time, O(1) Space
+    public static int numOfSubarraysBruteForce(int[] arr) {
         int count = 0;
         int n = arr.length;
         for (int i = 0; i < n; i++) {
@@ -82,34 +86,22 @@ public class NumberOfSubarraysWithOddSumBrute {
         }
         return count;
     }
-}
-```
 
-### Optimized Solution (Even/Odd Prefix Tracking)
-```java
-public class NumberOfSubarraysWithOddSum {
-    public static void main(String[] args) {
-        int[] arr = {1, 3, 5};
-        System.out.println(numOfSubarrays(arr)); // Output: 4
-    }
-
-    public static int numOfSubarrays(int[] arr) {
+    // Optimized: O(n) Time, O(1) Space
+    public static int numOfSubarraysOptimized(int[] arr) {
         int count = 0;
         int prefixSum = 0;
 
-        // Even prefix count starts at 1 to handle the empty prefix sum (0)
-        int evenPrefCount = 1;
+        int evenPrefCount = 1; // Base case: prefix sum of 0 at index -1
         int oddPrefCount = 0;
 
         for (int num : arr) {
             prefixSum += num;
 
             if (prefixSum % 2 == 0) {
-                // Even prefix sum needs an odd prefix sum to yield an odd subarray sum
                 count = count + oddPrefCount;
                 evenPrefCount++;
             } else {
-                // Odd prefix sum needs an even prefix sum to yield an odd subarray sum
                 count = count + evenPrefCount;
                 oddPrefCount++;
             }

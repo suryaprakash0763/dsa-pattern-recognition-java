@@ -55,17 +55,21 @@ You must write an algorithm that runs in $O(n)$ time and without using the divis
 
 ## Java Implementation
 
-### Brute Force Solution
+- **Java Source File**: [ProductArrayExceptSelf.java](code/ProductArrayExceptSelf.java)
+
 ```java
 import java.util.Arrays;
 
-public class ProductArrayExceptSelfBrute {
+public class ProductArrayExceptSelf {
     public static void main(String[] args) {
         int[] nums = {1, 2, 3, 4};
-        System.out.println(Arrays.toString(productExceptSelf(nums))); // Output: [24, 12, 8, 6]
+
+        System.out.println("Brute Force Output: " + Arrays.toString(productExceptSelfBruteForce(nums)));
+        System.out.println("Optimized Output: " + Arrays.toString(productExceptSelfOptimized(nums)));
     }
 
-    public static int[] productExceptSelf(int[] nums) {
+    // Brute Force: O(n^2) Time, O(1) auxiliary Space
+    public static int[] productExceptSelfBruteForce(int[] nums) {
         int n = nums.length;
         int[] ans = new int[n];
         for (int i = 0; i < n; i++) {
@@ -79,20 +83,9 @@ public class ProductArrayExceptSelfBrute {
         }
         return ans;
     }
-}
-```
 
-### Optimized Solution (Prefix & Suffix Products)
-```java
-import java.util.Arrays;
-
-public class ProductArrayExceptSelf {
-    public static void main(String[] args) {
-        int[] nums = {1, 2, 3, 4};
-        System.out.println(Arrays.toString(productExceptSelf(nums))); // Output: [24, 12, 8, 6]
-    }
-
-    public static int[] productExceptSelf(int[] nums) {
+    // Optimized: O(n) Time, O(1) auxiliary Space
+    public static int[] productExceptSelfOptimized(int[] nums) {
         int n = nums.length;
         int[] ans = new int[n];
 

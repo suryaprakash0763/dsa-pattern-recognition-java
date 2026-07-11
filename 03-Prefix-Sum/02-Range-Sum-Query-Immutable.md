@@ -58,9 +58,10 @@ Implement the `NumArray` class:
 
 ## Java Implementation
 
-### Brute Force Solution
+- **Java Source File**: [RangeSumQueryImmutable.java](code/RangeSumQueryImmutable.java)
+
 ```java
-public class RangeSumQueryBrute {
+class RangeSumQueryBrute {
     private int[] nums;
 
     public RangeSumQueryBrute(int[] nums) {
@@ -74,18 +75,8 @@ public class RangeSumQueryBrute {
         }
         return sum;
     }
-
-    public static void main(String[] args) {
-        int[] nums = {-2, 0, 3, -5, 2, -1};
-        RangeSumQueryBrute numArray = new RangeSumQueryBrute(nums);
-        System.out.println(numArray.sumRange(0, 2)); // Output: 1
-        System.out.println(numArray.sumRange(2, 5)); // Output: -1
-    }
 }
-```
 
-### Optimized Solution (Prefix Sum)
-```java
 public class RangeSumQueryImmutable {
     private int[] prefix;
 
@@ -102,11 +93,16 @@ public class RangeSumQueryImmutable {
 
     public static void main(String[] args) {
         int[] nums = {-2, 0, 3, -5, 2, -1};
-        RangeSumQueryImmutable numArray = new RangeSumQueryImmutable(nums);
 
-        System.out.println(numArray.sumRange(0, 2)); // Output: 1
-        System.out.println(numArray.sumRange(2, 5)); // Output: -1
-        System.out.println(numArray.sumRange(0, 5)); // Output: -3
+        // Brute Force Demonstration
+        RangeSumQueryBrute brute = new RangeSumQueryBrute(nums);
+        System.out.println("Brute Force Query (0, 2): " + brute.sumRange(0, 2));
+        System.out.println("Brute Force Query (2, 5): " + brute.sumRange(2, 5));
+
+        // Optimized Demonstration
+        RangeSumQueryImmutable optimized = new RangeSumQueryImmutable(nums);
+        System.out.println("Optimized Query (0, 2): " + optimized.sumRange(0, 2));
+        System.out.println("Optimized Query (2, 5): " + optimized.sumRange(2, 5));
     }
 }
 ```
