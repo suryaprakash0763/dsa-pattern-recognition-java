@@ -39,6 +39,13 @@ Welcome to the **DSA-Java** reference repository. This repository is structured 
 ### 3. Prefix Sum
 - [x] 01. Running Sum of 1D Array
 - [x] 02. Find Pivot Index
+- [x] 03. Range Sum Query - Immutable
+- [x] 04. Find the Highest Altitude
+- [x] 05. Minimum Value to Get Positive Step by Step Sum
+- [x] 06. Subarray Sum Equals K
+- [x] 07. Subarray Sums Divisible by K
+- [x] 08. Contiguous Array
+- [x] 09. Product of Array Except Self
 
 ---
 

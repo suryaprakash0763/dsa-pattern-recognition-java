@@ -24,12 +24,24 @@ Prefix Sum is a technique where we precompute cumulative sums of elements in a s
 - **Used when**:
   - Finding pivot indices or equilibrium points in an array.
 
+### 3. Prefix Sum + HashMap (Subarray Sums with Negative Numbers)
+- **Concept**: If the subarray sum from `i` to `j` is `k`, then `prefixSum[j] - prefixSum[i - 1] = k`. We can check if `prefixSum[j] - k` has been seen before using a HashMap.
+- **Used when**:
+  - Finding the count or maximum length of contiguous subarrays summing to `k`.
+
 ---
 
 ## 📋 Problem List
 
 - ✅ 01. Running Sum of 1D Array
 - ✅ 02. Find Pivot Index
+- ✅ 03. Range Sum Query - Immutable
+- ✅ 04. Find the Highest Altitude
+- ✅ 05. Minimum Value to Get Positive Step by Step Sum
+- ✅ 06. Subarray Sum Equals K
+- ✅ 07. Subarray Sums Divisible by K
+- ✅ 08. Contiguous Array
+- ✅ 09. Product of Array Except Self
 
 ---
 
@@ -37,13 +49,15 @@ Prefix Sum is a technique where we precompute cumulative sums of elements in a s
 
 | Pattern | Variable / Data Structure |
 | :--- | :--- |
-| Rolling Sum | `prefixSum`, `leftSum` |
-| Cumulative Array | `prefix[]` |
+| Rolling Sum | `prefixSum`, `leftSum`, `currentAltitude`, `sum` |
+| Cumulative Array | `prefix[]`, `ans[]` |
+| Prefix modulo remainders | `remCounts[]` array of size `k` |
+| Prefix Sum state tracking | `HashMap<Integer, Integer>` (prefixSum -> frequency/firstIndex) |
 
 ---
 
 ## Complexity
-- **Time Complexity**: $O(n)$ (since we build the sum array in a single pass of the input).
+- **Time Complexity**: $O(n)$ (since we build and process the prefix sums in a single pass).
 - **Space Complexity**:
   - $O(1)$ auxiliary space if done in-place or if using rolling sum variables.
-  - $O(n)$ auxiliary space if creating a separate prefix sum array.
+  - $O(n)$ auxiliary space if creating a separate prefix sum array or HashMap.
