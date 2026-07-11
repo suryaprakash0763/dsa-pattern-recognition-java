@@ -39,17 +39,16 @@ Welcome to the **DSA-Java** reference repository. This repository is structured 
 ### 3. Prefix Sum
 - [x] 01. Running Sum of 1D Array
 - [x] 02. Find Pivot Index
-- [x] 03. Range Sum Query - Immutable
-- [x] 04. Find the Highest Altitude
-- [x] 05. Minimum Value to Get Positive Step by Step Sum
-- [x] 06. Subarray Sum Equals K
-- [x] 07. Subarray Sums Divisible by K
-- [x] 08. Contiguous Array
-- [x] 09. Product of Array Except Self
 
 ---
 
-### 4. HashMap / HashSet (Planned)
+### 4. Matrix
+- [x] 01. Transpose Matrix
+- [x] 02. Rotate Image (Brute Force & Optimized)
+
+---
+
+### 5. HashMap / HashSet (Planned)
 - [ ] 01. Contains Duplicate
 - [ ] 02. Contains Nearby Duplicate
 - [ ] 03. Majority Element
@@ -57,12 +56,12 @@ Welcome to the **DSA-Java** reference repository. This repository is structured 
 
 ---
 
-### 5. Prefix / Suffix (Planned)
+### 6. Prefix / Suffix (Planned)
 - [ ] 01. Product of Array Except Self
 
 ---
 
-### 6. Greedy (Planned)
+### 7. Greedy (Planned)
 - [ ] 01. Best Time to Buy and Sell Stock
 
 ---
@@ -72,6 +71,7 @@ Welcome to the **DSA-Java** reference repository. This repository is structured 
 - [`01-Two-Pointers/`](file:///C:/Users/DELL/Downloads/DSA/01-Two-Pointers/) — Concepts, revision notes, problem breakdowns, and Java code for the Two Pointers pattern.
 - [`02-Sliding-Window/`](file:///C:/Users/DELL/Downloads/DSA/02-Sliding-Window/) — Concepts, revision notes, problem breakdowns, and Java code for the Sliding Window pattern.
 - [`03-Prefix-Sum/`](file:///C:/Users/DELL/Downloads/DSA/03-Prefix-Sum/) — Concepts, revision notes, problem breakdowns, and Java code for the Prefix Sum pattern.
+- [`04-Matrix/`](file:///C:/Users/DELL/Downloads/DSA/04-Matrix/) — Concepts, revision notes, problem breakdowns, and Java code for the Matrix pattern.
 - [`Interview-Revision/`](file:///C:/Users/DELL/Downloads/DSA/Interview-Revision/) — Pattern recognition cheat sheets, complexity references, and tips.
 
 ---
