@@ -3,8 +3,6 @@
 ## Question
 Given an array of integers `arr`, return the number of subarrays with an **odd** sum.
 
-Since the answer can be very large, return it modulo $10^9 + 7$.
-
 ### Example
 - **Input**: `arr = [1, 3, 5]`
 - **Output**: `4`
@@ -21,7 +19,7 @@ Since the answer can be very large, return it modulo $10^9 + 7$.
 
 ## Pattern Description
 - **Pattern**: Prefix Sum (Even/Odd Tracking)
-- **Type**: Modulo Congruence Counting
+- **Type**: Parity Congruence Counting
 - **Recognition Clue**: "Count of subarrays" + "odd sum".
   A subarray sum `arr[i...j] = prefixSum[j] - prefixSum[i - 1]` is **odd** if and only if one of the prefix sums is **odd** and the other is **even** (since $\text{Odd} - \text{Even} = \text{Odd}$ and $\text{Even} - \text{Odd} = \text{Odd}$).
 
@@ -37,7 +35,6 @@ Since the answer can be very large, return it modulo $10^9 + 7$.
    - Update the running `prefixSum`.
    - If the current `prefixSum` is **even**, it forms an odd subarray when paired with any previous **odd** prefix sum. Add `oddPrefCount` to our total count, and increment `evenPrefCount`.
    - If the current `prefixSum` is **odd**, it forms an odd subarray when paired with any previous **even** prefix sum. Add `evenPrefCount` to our total count, and increment `oddPrefCount`.
-5. Modulo the running sum by $10^9 + 7$ to avoid overflow.
 
 ---
 
@@ -60,7 +57,6 @@ public class NumberOfSubarraysWithOddSum {
     }
 
     public static int numOfSubarrays(int[] arr) {
-        int MOD = 1000000007;
         int count = 0;
         int prefixSum = 0;
 
@@ -73,11 +69,11 @@ public class NumberOfSubarraysWithOddSum {
 
             if (prefixSum % 2 == 0) {
                 // Even prefix sum needs an odd prefix sum to yield an odd subarray sum
-                count = (count + oddPrefCount) % MOD;
+                count = count + oddPrefCount;
                 evenPrefCount++;
             } else {
                 // Odd prefix sum needs an even prefix sum to yield an odd subarray sum
-                count = (count + evenPrefCount) % MOD;
+                count = count + evenPrefCount;
                 oddPrefCount++;
             }
         }

@@ -5,7 +5,6 @@ public class NumberOfSubarraysWithOddSum {
     }
 
     public static int numOfSubarrays(int[] arr) {
-        int MOD = 1000000007;
         int count = 0;
         int prefixSum = 0;
 
@@ -18,10 +17,10 @@ public class NumberOfSubarraysWithOddSum {
             // In Java, % on negative values can be negative, but since we are working with
             // sums of array elements, we check if remainder is non-zero
             if (prefixSum % 2 == 0) {
-                count = (count + oddPrefCount) % MOD;
+                count = count + oddPrefCount;
                 evenPrefCount++;
             } else {
-                count = (count + evenPrefCount) % MOD;
+                count = count + evenPrefCount;
                 oddPrefCount++;
             }
         }
