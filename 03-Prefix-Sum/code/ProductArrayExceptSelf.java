@@ -3,29 +3,10 @@ import java.util.Arrays;
 public class ProductArrayExceptSelf {
     public static void main(String[] args) {
         int[] nums = {1, 2, 3, 4};
-
-        System.out.println("Brute Force Output: " + Arrays.toString(productExceptSelfBruteForce(nums)));
-        System.out.println("Optimized Output: " + Arrays.toString(productExceptSelfOptimized(nums)));
+        System.out.println(Arrays.toString(productExceptSelf(nums))); // Output: [24, 12, 8, 6]
     }
 
-    // Brute Force: O(n^2) Time, O(1) auxiliary Space
-    public static int[] productExceptSelfBruteForce(int[] nums) {
-        int n = nums.length;
-        int[] ans = new int[n];
-        for (int i = 0; i < n; i++) {
-            int product = 1;
-            for (int j = 0; j < n; j++) {
-                if (i != j) {
-                    product *= nums[j];
-                }
-            }
-            ans[i] = product;
-        }
-        return ans;
-    }
-
-    // Optimized: O(n) Time, O(1) auxiliary Space
-    public static int[] productExceptSelfOptimized(int[] nums) {
+    public static int[] productExceptSelf(int[] nums) {
         int n = nums.length;
         int[] ans = new int[n];
 

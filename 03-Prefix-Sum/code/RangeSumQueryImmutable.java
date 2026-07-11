@@ -1,19 +1,3 @@
-class RangeSumQueryBrute {
-    private int[] nums;
-
-    public RangeSumQueryBrute(int[] nums) {
-        this.nums = nums;
-    }
-
-    public int sumRange(int left, int right) {
-        int sum = 0;
-        for (int i = left; i <= right; i++) {
-            sum += nums[i];
-        }
-        return sum;
-    }
-}
-
 public class RangeSumQueryImmutable {
     private int[] prefix;
 
@@ -30,15 +14,10 @@ public class RangeSumQueryImmutable {
 
     public static void main(String[] args) {
         int[] nums = {-2, 0, 3, -5, 2, -1};
+        RangeSumQueryImmutable numArray = new RangeSumQueryImmutable(nums);
 
-        // Brute Force Demonstration
-        RangeSumQueryBrute brute = new RangeSumQueryBrute(nums);
-        System.out.println("Brute Force Query (0, 2): " + brute.sumRange(0, 2));
-        System.out.println("Brute Force Query (2, 5): " + brute.sumRange(2, 5));
-
-        // Optimized Demonstration
-        RangeSumQueryImmutable optimized = new RangeSumQueryImmutable(nums);
-        System.out.println("Optimized Query (0, 2): " + optimized.sumRange(0, 2));
-        System.out.println("Optimized Query (2, 5): " + optimized.sumRange(2, 5));
+        System.out.println(numArray.sumRange(0, 2)); // Output: 1
+        System.out.println(numArray.sumRange(2, 5)); // Output: -1
+        System.out.println(numArray.sumRange(0, 5)); // Output: -3
     }
 }

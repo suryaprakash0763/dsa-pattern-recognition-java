@@ -4,19 +4,19 @@ Prefix Sum is a technique used to perform fast range sum queries or partition-ba
 
 ---
 
-## Brute Force vs Optimized Complexity Summary
+## Complexity Summary
 
-| Problem | Brute Force Time/Space | Optimized Time/Space | Key Technique |
+| Problem | Time Complexity | Space Complexity | Key Technique |
 | :--- | :--- | :--- | :--- |
-| **01. Running Sum of 1D Array** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ | Cumulative Sum in-place |
-| **02. Find Pivot Index** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ | `totalSum - leftSum - nums[i]` |
-| **03. Range Sum Query - Immutable** | $O(N)$ query / $O(1)$ | $O(1)$ query / $O(N)$ | Precomputed 1-indexed Prefix Array |
-| **04. Subarray Sum Equals K** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Prefix Sum + HashMap frequency |
-| **05. Longest Subarray Sum Equals K** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Prefix Sum + HashMap first index |
-| **06. Contiguous Array** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Map `0` to `-1` + HashMap first index |
-| **07. Count Number of Nice Subarrays** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Map odd to 1, even to 0 + Prefix frequency |
-| **08. Number of Subarrays With Odd Sum** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ | Track counts of odd & even prefixes |
-| **09. Product of Array Except Self** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ auxiliary | Prefix & Suffix product passes |
+| **01. Running Sum of 1D Array** | $O(N)$ | $O(1)$ auxiliary | Cumulative Sum in-place |
+| **02. Find Pivot Index** | $O(N)$ | $O(1)$ | `totalSum - leftSum - nums[i]` |
+| **03. Range Sum Query - Immutable** | $O(1)$ query | $O(N)$ | Precomputed 1-indexed Prefix Array |
+| **04. Subarray Sum Equals K** | $O(N)$ | $O(N)$ | Prefix Sum + HashMap frequency |
+| **05. Longest Subarray Sum Equals K** | $O(N)$ | $O(N)$ | Prefix Sum + HashMap first index |
+| **06. Contiguous Array** | $O(N)$ | $O(N)$ | Map `0` to `-1` + HashMap first index |
+| **07. Count Number of Nice Subarrays** | $O(N)$ | $O(N)$ | Map odd to 1, even to 0 + Prefix frequency array |
+| **08. Number of Subarrays With Odd Sum** | $O(N)$ | $O(1)$ | Track counts of odd & even prefixes |
+| **09. Product of Array Except Self** | $O(N)$ | $O(1)$ auxiliary | Prefix & Suffix product passes |
 
 ---
 

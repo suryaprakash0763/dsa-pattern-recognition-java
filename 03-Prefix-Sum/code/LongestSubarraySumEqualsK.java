@@ -4,29 +4,10 @@ public class LongestSubarraySumEqualsK {
     public static void main(String[] args) {
         int[] nums = {1, -1, 5, -2, 3};
         int k = 3;
-
-        System.out.println("Brute Force Output: " + longestSubarraySumBruteForce(nums, k));
-        System.out.println("Optimized Output: " + longestSubarraySumOptimized(nums, k));
+        System.out.println(longestSubarraySum(nums, k)); // Output: 4
     }
 
-    // Brute Force: O(n^2) Time, O(1) Space
-    public static int longestSubarraySumBruteForce(int[] nums, int k) {
-        int maxLength = 0;
-        int n = nums.length;
-        for (int i = 0; i < n; i++) {
-            int sum = 0;
-            for (int j = i; j < n; j++) {
-                sum += nums[j];
-                if (sum == k) {
-                    maxLength = Math.max(maxLength, j - i + 1);
-                }
-            }
-        }
-        return maxLength;
-    }
-
-    // Optimized: O(n) Time, O(n) Space (Prefix Sum + HashMap)
-    public static int longestSubarraySumOptimized(int[] nums, int k) {
+    public static int longestSubarraySum(int[] nums, int k) {
         int maxLength = 0;
         int prefixSum = 0;
         HashMap<Integer, Integer> map = new HashMap<>();

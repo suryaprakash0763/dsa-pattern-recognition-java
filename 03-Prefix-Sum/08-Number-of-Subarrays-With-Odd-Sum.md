@@ -28,71 +28,35 @@ Since the answer can be very large, return it modulo $10^9 + 7$.
 ---
 
 ## Approach
-
-### 1. Brute Force (Nested Loops)
-- Examine all possible subarrays. Use an outer loop `i` for start index and inner loop `j` for end index.
-- Keep a running sum of the subarray. If `sum % 2 != 0`, increment the count.
-- **Time Complexity**: $O(n^2)$
-- **Space Complexity**: $O(1)$
-
-### 2. Optimized (Even/Odd Prefix Count Tracking)
-- Traverse the array and maintain the running `prefixSum`.
-- Maintain two variables:
-  - `oddPrefCount`: the count of odd prefix sums seen so far.
-  - `evenPrefCount`: the count of even prefix sums seen so far (initialized to `1` because the empty prefix sum of `0` at index `-1` is even).
-- At any element:
-  - If the current `prefixSum` is **odd**, it forms an odd subarray when paired with any previous **even** prefix sum. Thus, add `evenPrefCount` to our total count, and increment `oddPrefCount`.
-  - If the current `prefixSum` is **even**, it forms an odd subarray when paired with any previous **odd** prefix sum. Thus, add `oddPrefCount` to our total count, and increment `evenPrefCount`.
-- Return `count % 1000000007`.
-- **Time Complexity**: $O(n)$
-- **Space Complexity**: $O(1)$ auxiliary space.
+1. A subarray sum `arr[i...j] = prefixSum[j] - prefixSum[i - 1]` is **odd** if and only if one prefix sum is **even** and the other is **odd** (since $\text{Odd} - \text{Even} = \text{Odd}$ and $\text{Even} - \text{Odd} = \text{Odd}$).
+2. Maintain a running `prefixSum`.
+3. Keep track of:
+   - `oddPrefCount`: the count of odd prefix sums seen so far.
+   - `evenPrefCount`: the count of even prefix sums seen so far (initialized to `1` because the empty prefix sum of `0` at index `-1` is even).
+4. For each element:
+   - Update the running `prefixSum`.
+   - If the current `prefixSum` is **even**, it forms an odd subarray when paired with any previous **odd** prefix sum. Add `oddPrefCount` to our total count, and increment `evenPrefCount`.
+   - If the current `prefixSum` is **odd**, it forms an odd subarray when paired with any previous **even** prefix sum. Add `evenPrefCount` to our total count, and increment `oddPrefCount`.
+5. Modulo the running sum by $10^9 + 7$ to avoid overflow.
 
 ---
 
 ## Complexity
-- **Time Complexity**:
-  - Brute Force: $O(n^2)$
-  - Optimized: $O(n)$
-- **Space Complexity**:
-  - Brute Force: $O(1)$
-  - Optimized: $O(1)$ auxiliary space.
+- **Time Complexity**: $O(n)$ where $n$ is the length of `arr`. We scan the array once.
+- **Space Complexity**: $O(1)$ auxiliary space since we only track parity counts.
 
 ---
 
 ## Java Implementation
 
-### Brute Force Solution
-```java
-public class NumberOfSubarraysWithOddSumBrute {
-    public static void main(String[] args) {
-        int[] arr = {1, 3, 5};
-        System.out.println(numOfSubarrays(arr)); // Output: 4
-    }
-
-    public static int numOfSubarrays(int[] arr) {
-        int count = 0;
-        int MOD = 1000000007;
-        int n = arr.length;
-        for (int i = 0; i < n; i++) {
-            long sum = 0;
-            for (int j = i; j < n; j++) {
-                sum += arr[j];
-                if (sum % 2 != 0) {
-                    count = (count + 1) % MOD;
-                }
-            }
-        }
-        return count;
-    }
-}
-```
-
-### Optimized Solution (Even/Odd Prefix Tracking)
 ```java
 public class NumberOfSubarraysWithOddSum {
     public static void main(String[] args) {
         int[] arr = {1, 3, 5};
-        System.out.println(numOfSubarrays(arr)); // Output: 4
+
+        int result = numOfSubarrays(arr);
+
+        System.out.println(result); // Output: 4
     }
 
     public static int numOfSubarrays(int[] arr) {

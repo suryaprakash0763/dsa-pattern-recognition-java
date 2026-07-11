@@ -27,73 +27,33 @@ Return the leftmost pivot index. If no such index exists, return `-1`.
 ---
 
 ## Approach
-
-### 1. Brute Force
-- For each index `i`, calculate the sum of elements to its left (from `0` to `i - 1`) and the sum of elements to its right (from `i + 1` to `n - 1`).
-- Check if `leftSum == rightSum`. Return `i` if true.
-- **Time Complexity**: $O(n^2)$
-- **Space Complexity**: $O(1)$
-
-### 2. Optimized (Prefix Sum / Left vs Right Sum)
-- Calculate the `totalSum` of all elements in the array.
-- Maintain a running `leftSum` initialized to `0`.
-- Iterate through the array. For each index `i`:
-  - Calculate `rightSum = totalSum - leftSum - nums[i]`.
-  - If `leftSum == rightSum`, return `i`.
-  - Add `nums[i]` to `leftSum`.
-- **Time Complexity**: $O(n)$
-- **Space Complexity**: $O(1)$
+1. Compute the `totalSum` of all elements in the array.
+2. Maintain a running `leftSum` initialized to `0`.
+3. Iterate through the array. At each index `i`:
+   - Calculate the sum of elements to the right of `i` as:
+     `rightSum = totalSum - leftSum - nums[i]`
+   - If `leftSum == rightSum`, return `i` as the pivot index.
+   - Otherwise, add `nums[i]` to `leftSum` and proceed.
+4. If the loop completes without finding a pivot index, return `-1`.
 
 ---
 
 ## Complexity
-- **Time Complexity**:
-  - Brute Force: $O(n^2)$
-  - Optimized: $O(n)$
-- **Space Complexity**:
-  - Brute Force: $O(1)$
-  - Optimized: $O(1)$
+- **Time Complexity**: $O(n)$ where $n$ is the length of `nums`. We traverse the array to find the total sum, and then traverse it again to find the pivot.
+- **Space Complexity**: $O(1)$ auxiliary space since we only use a few integer variables.
 
 ---
 
 ## Java Implementation
 
-### Brute Force Solution
-```java
-public class FindPivotIndexBrute {
-    public static void main(String[] args) {
-        int[] nums = {1, 7, 3, 6, 5, 6};
-        System.out.println(pivotIndex(nums)); // Output: 3
-    }
-
-    public static int pivotIndex(int[] nums) {
-        int n = nums.length;
-        for (int i = 0; i < n; i++) {
-            int leftSum = 0;
-            for (int j = 0; j < i; j++) {
-                leftSum += nums[j];
-            }
-
-            int rightSum = 0;
-            for (int j = i + 1; j < n; j++) {
-                rightSum += nums[j];
-            }
-
-            if (leftSum == rightSum) {
-                return i;
-            }
-        }
-        return -1;
-    }
-}
-```
-
-### Optimized Solution (Prefix Sum)
 ```java
 public class FindPivotIndex {
     public static void main(String[] args) {
         int[] nums = {1, 7, 3, 6, 5, 6};
-        System.out.println(pivotIndex(nums)); // Output: 3
+
+        int pivot = pivotIndex(nums);
+
+        System.out.println(pivot); // Output: 3
     }
 
     public static int pivotIndex(int[] nums) {
@@ -109,6 +69,7 @@ public class FindPivotIndex {
             }
             leftSum += nums[i];
         }
+
         return -1;
     }
 }

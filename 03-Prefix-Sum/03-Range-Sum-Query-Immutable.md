@@ -27,64 +27,23 @@ Implement the `NumArray` class:
 ---
 
 ## Approach
-
-### 1. Brute Force
-- In the constructor, store the original array `nums` directly.
-- In `sumRange(left, right)`, use a loop to iterate from `left` to `right` and sum the elements.
-- **Time Complexity**:
-  - Initialization: $O(1)$
-  - Query (`sumRange`): $O(n)$ per query, where $n$ is the range length.
-- **Space Complexity**: $O(n)$ to store the array (or $O(1)$ auxiliary space).
-
-### 2. Optimized (Prefix Sum Array)
-- In the constructor, build a prefix sum array `prefix` of size `nums.length + 1` where `prefix[i]` stores the sum of the first `i` elements.
-- In `sumRange(left, right)`, return `prefix[right + 1] - prefix[left]`. This handles the edge case where `left = 0` automatically.
-- **Time Complexity**:
-  - Initialization: $O(n)$ to precompute prefix sums.
-  - Query (`sumRange`): $O(1)$ constant time lookup.
-- **Space Complexity**: $O(n)$ to store the prefix sum array.
+1. Build a prefix sum array `prefix` of size `nums.length + 1` where `prefix[i]` stores the sum of the first `i` elements (`nums[0]` through `nums[i-1]`).
+2. Setting `prefix[0] = 0` helps us handle range sum queries starting at index `0` without any boundary checks.
+3. The sum of range `[left, right]` can be computed in $O(1)$ constant time as:
+   `sumRange(left, right) = prefix[right + 1] - prefix[left]`.
 
 ---
 
 ## Complexity
 - **Time Complexity**:
-  - Brute Force: $O(1)$ init, $O(n)$ per query.
-  - Optimized: $O(n)$ init, $O(1)$ per query.
-- **Space Complexity**:
-  - Brute Force: $O(1)$ auxiliary space.
-  - Optimized: $O(n)$ auxiliary space to store prefix sums.
+  - Initialization: $O(n)$ to build prefix array.
+  - Query (`sumRange`): $O(1)$ constant time lookup.
+- **Space Complexity**: $O(n)$ to store the prefix sum array.
 
 ---
 
 ## Java Implementation
 
-### Brute Force Solution
-```java
-public class RangeSumQueryBrute {
-    private int[] nums;
-
-    public RangeSumQueryBrute(int[] nums) {
-        this.nums = nums;
-    }
-
-    public int sumRange(int left, int right) {
-        int sum = 0;
-        for (int i = left; i <= right; i++) {
-            sum += nums[i];
-        }
-        return sum;
-    }
-
-    public static void main(String[] args) {
-        int[] nums = {-2, 0, 3, -5, 2, -1};
-        RangeSumQueryBrute numArray = new RangeSumQueryBrute(nums);
-        System.out.println(numArray.sumRange(0, 2)); // Output: 1
-        System.out.println(numArray.sumRange(2, 5)); // Output: -1
-    }
-}
-```
-
-### Optimized Solution (Prefix Sum)
 ```java
 public class RangeSumQueryImmutable {
     private int[] prefix;
