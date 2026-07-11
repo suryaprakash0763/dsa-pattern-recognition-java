@@ -1,4 +1,4 @@
-# 06. Subarray Sum Equals K
+# 04. Subarray Sum Equals K
 
 ## Question
 Given an array of integers `nums` and an integer `k`, return the total number of subarrays whose sum equals to `k`.

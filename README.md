@@ -40,11 +40,11 @@ Welcome to the **DSA-Java** reference repository. This repository is structured 
 - [x] 01. Running Sum of 1D Array
 - [x] 02. Find Pivot Index
 - [x] 03. Range Sum Query - Immutable
-- [x] 04. Find the Highest Altitude
-- [x] 05. Minimum Value to Get Positive Step by Step Sum
-- [x] 06. Subarray Sum Equals K
-- [x] 07. Subarray Sums Divisible by K
-- [x] 08. Contiguous Array
+- [x] 04. Subarray Sum Equals K
+- [x] 05. Longest Subarray Sum Equals K
+- [x] 06. Contiguous Array
+- [x] 07. Count Number of Nice Subarrays
+- [x] 08. Number of Subarrays With Odd Sum
 - [x] 09. Product of Array Except Self
 
 ---

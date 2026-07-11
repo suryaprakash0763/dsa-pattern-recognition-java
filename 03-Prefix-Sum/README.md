@@ -36,11 +36,11 @@ Prefix Sum is a technique where we precompute cumulative sums of elements in a s
 - ✅ 01. Running Sum of 1D Array
 - ✅ 02. Find Pivot Index
 - ✅ 03. Range Sum Query - Immutable
-- ✅ 04. Find the Highest Altitude
-- ✅ 05. Minimum Value to Get Positive Step by Step Sum
-- ✅ 06. Subarray Sum Equals K
-- ✅ 07. Subarray Sums Divisible by K
-- ✅ 08. Contiguous Array
+- ✅ 04. Subarray Sum Equals K
+- ✅ 05. Longest Subarray Sum Equals K
+- ✅ 06. Contiguous Array
+- ✅ 07. Count Number of Nice Subarrays
+- ✅ 08. Number of Subarrays With Odd Sum
 - ✅ 09. Product of Array Except Self
 
 ---
@@ -49,15 +49,14 @@ Prefix Sum is a technique where we precompute cumulative sums of elements in a s
 
 | Pattern | Variable / Data Structure |
 | :--- | :--- |
-| Rolling Sum | `prefixSum`, `leftSum`, `currentAltitude`, `sum` |
+| Rolling Sum | `prefixSum`, `leftSum`, `oddPrefCount`, `evenPrefCount` |
 | Cumulative Array | `prefix[]`, `ans[]` |
-| Prefix modulo remainders | `remCounts[]` array of size `k` |
-| Prefix Sum state tracking | `HashMap<Integer, Integer>` (prefixSum -> frequency/firstIndex) |
+| Prefix Sum state tracking | `HashMap<Integer, Integer>` (prefixSum -> frequency/firstIndex), `counts[]` array |
 
 ---
 
 ## Complexity
 - **Time Complexity**: $O(n)$ (since we build and process the prefix sums in a single pass).
 - **Space Complexity**:
-  - $O(1)$ auxiliary space if done in-place or if using rolling sum variables.
-  - $O(n)$ auxiliary space if creating a separate prefix sum array or HashMap.
+  - $O(1)$ auxiliary space if done in-place or using rolling sum variables.
+  - $O(n)$ auxiliary space if creating a separate prefix sum array, frequency array, or HashMap.

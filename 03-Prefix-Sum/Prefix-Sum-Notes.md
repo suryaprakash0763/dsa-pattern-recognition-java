@@ -11,11 +11,11 @@ Prefix Sum is a technique used to perform fast range sum queries or partition-ba
 | **01. Running Sum of 1D Array** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ | Cumulative Sum in-place |
 | **02. Find Pivot Index** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ | `totalSum - leftSum - nums[i]` |
 | **03. Range Sum Query - Immutable** | $O(N)$ query / $O(1)$ | $O(1)$ query / $O(N)$ | Precomputed 1-indexed Prefix Array |
-| **04. Find the Highest Altitude** | $O(N)$ / $O(N)$ | $O(N)$ / $O(1)$ | Running altitude max tracking |
-| **05. Min Value for Positive Step Sum** | $O(N \times \text{ans})$ / $O(1)$ | $O(N)$ / $O(1)$ | Track minimum prefix sum |
-| **06. Subarray Sum Equals K** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Prefix Sum + HashMap frequency |
-| **07. Subarray Sums Divisible by K** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(K)$ | Prefix Sum modulo remainder array |
-| **08. Contiguous Array** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Map `0` to `-1` + HashMap first index |
+| **04. Subarray Sum Equals K** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Prefix Sum + HashMap frequency |
+| **05. Longest Subarray Sum Equals K** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Prefix Sum + HashMap first index |
+| **06. Contiguous Array** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Map `0` to `-1` + HashMap first index |
+| **07. Count Number of Nice Subarrays** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(N)$ | Map odd to 1, even to 0 + Prefix frequency |
+| **08. Number of Subarrays With Odd Sum** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ | Track counts of odd & even prefixes |
 | **09. Product of Array Except Self** | $O(N^2)$ / $O(1)$ | $O(N)$ / $O(1)$ auxiliary | Prefix & Suffix product passes |
 
 ---
@@ -39,10 +39,6 @@ $$\text{Sum}(L, R) = \text{prefix}[R] - \text{prefix}[L - 1]$$
 ### Question
 Given an array `nums`. We define a running sum of an array as `runningSum[i] = sum(nums[0]…nums[i])`. Return the running sum of `nums`.
 
-### Example
-- **Input**: `nums = [1, 2, 3, 4]`
-- **Output**: `[1, 3, 6, 10]`
-
 ### Solution Idea
 We can modify the array in-place to achieve $O(1)$ auxiliary space.
 For each element from index `1` to `nums.length - 1`, we update `nums[i] = nums[i - 1] + nums[i]`.
@@ -58,12 +54,6 @@ For each element from index `1` to `nums.length - 1`, we update `nums[i] = nums[
 ### Question
 Given an array of integers `nums`, calculate the pivot index of this array.
 The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the right of the index. If no such index exists, return `-1`.
-
-### Example
-- **Input**: `nums = [1, 7, 3, 6, 5, 6]`
-- **Output**: `3`
-  - Left sum = `1 + 7 + 3 = 11`
-  - Right sum = `5 + 6 = 11`
 
 ### Mathematical Equation (Single Pass)
 Instead of calculating the left sum and right sum from scratch at each index:
@@ -98,39 +88,7 @@ This avoids the edge case of checking if `left == 0`.
 
 ---
 
-## Problem 4: Find the Highest Altitude
-
-### Question
-Given a sequence of altitude gains, find the maximum altitude reached starting at altitude 0.
-
-### Solution Idea
-Keep a running total of the current altitude and update a maximum tracking variable.
-- `currentAltitude += gain[i]`
-- `maxAltitude = Math.max(maxAltitude, currentAltitude)`
-
-### Complexity
-- **Time Complexity**: $O(n)$
-- **Space Complexity**: $O(1)$
-
----
-
-## Problem 5: Minimum Value to Get Positive Step by Step Sum
-
-### Question
-Find the minimum starting value such that the running prefix sum never drops below 1.
-
-### Solution Idea
-1. Trace the prefix sum and keep track of the minimum value `minSum` it ever reaches.
-2. Since we need $\text{startValue} + \text{minSum} \ge 1$, the minimum starting value is $1 - \text{minSum}$.
-3. Return `1 - minSum` (since `minSum` starts at `0` and can only decrease, $1 - \text{minSum} \ge 1$ is guaranteed if `minSum <= 0`).
-
-### Complexity
-- **Time Complexity**: $O(n)$
-- **Space Complexity**: $O(1)$
-
----
-
-## Problem 6: Subarray Sum Equals K
+## Problem 4: Subarray Sum Equals K
 
 ### Question
 Find the number of contiguous subarrays that sum to `k` (elements can be negative).
@@ -147,26 +105,24 @@ As we compute the running `prefixSum`, we check if `prefixSum - k` exists in a H
 
 ---
 
-## Problem 7: Subarray Sums Divisible by K
+## Problem 5: Longest Subarray Sum Equals K
 
 ### Question
-Find the number of subarrays whose sum is divisible by `k`.
+Find the maximum length of a contiguous subarray whose sum equals `k`.
 
 ### Solution Idea
-A subarray sum is divisible by `k` if the remainders of their prefix sums modulo `k` are identical:
-$$\text{prefixSum}[j] \pmod k == \text{prefixSum}[i-1] \pmod k$$
-We track remainder frequencies. For Java, we must normalize negative remainders:
-- `rem = (prefixSum % k + k) % k`
-- Keep a frequency array `remCounts` of size `k`.
-- Add `remCounts[rem]` to our answer, then increment `remCounts[rem]`.
+Similar to "Subarray Sum Equals K", but instead of frequency, we track the **first occurrence index** of each prefix sum in a HashMap.
+If `prefixSum - k` exists in the HashMap, the length is `current_index - first_occurrence_index`. Update `maxLength`.
+Do not overwrite the index for a prefix sum if it is already present, in order to maximize the distance.
+- **Base Case**: Put `(0, -1)` in the map.
 
 ### Complexity
 - **Time Complexity**: $O(n)$
-- **Space Complexity**: $O(k)$
+- **Space Complexity**: $O(n)$
 
 ---
 
-## Problem 8: Contiguous Array
+## Problem 6: Contiguous Array
 
 ### Question
 Find the maximum length of a binary subarray (0s and 1s) with an equal number of 0s and 1s.
@@ -181,6 +137,42 @@ Find the maximum length of a binary subarray (0s and 1s) with an equal number of
 ### Complexity
 - **Time Complexity**: $O(n)$
 - **Space Complexity**: $O(n)$
+
+---
+
+## Problem 7: Count Number of Nice Subarrays
+
+### Question
+Given an array of integers `nums` and an integer `k`, return the number of nice subarrays (a continuous subarray with exactly `k` odd numbers).
+
+### Solution Idea
+1. Convert the problem: Transform odd numbers to `1` and even numbers to `0`. The problem reduces to finding subarrays with a sum equal to `k`.
+2. Keep a running count of odd numbers (`oddCount`).
+3. Since `oddCount` can never exceed the array length `n`, we can use a frequency array `counts` of size `n + 1` instead of a HashMap for $O(1)$ lookups.
+4. If `oddCount >= k`, add `counts[oddCount - k]` to the total nice subarrays count.
+5. Initialize `counts[0] = 1`.
+
+### Complexity
+- **Time Complexity**: $O(n)$
+- **Space Complexity**: $O(n)$
+
+---
+
+## Problem 8: Number of Subarrays With Odd Sum
+
+### Question
+Given an array of integers `arr`, return the number of subarrays with an **odd** sum, modulo $10^9 + 7$.
+
+### Solution Idea
+1. A subarray sum is odd if it is formed by pairing an odd prefix sum with an even prefix sum ($\text{Odd} - \text{Even} = \text{Odd}$).
+2. Track the counts of even and odd prefix sums seen so far (`evenPrefCount` and `oddPrefCount`).
+3. If the current prefix sum is odd, it can pair with all previous even prefix sums to yield an odd subarray sum. Thus, add `evenPrefCount` to count.
+4. If the current prefix sum is even, it can pair with all previous odd prefix sums to yield an odd subarray sum. Thus, add `oddPrefCount` to count.
+5. Initialize `evenPrefCount = 1` (for prefix sum 0).
+
+### Complexity
+- **Time Complexity**: $O(n)$
+- **Space Complexity**: $O(1)$
 
 ---
 
